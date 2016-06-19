@@ -7,7 +7,7 @@
   "authors": [
     {
       "name": "Romain Cottard",
-      "email": "",
+      "email": "no-reply@gmail.com",
       "role": "Developer"
     }
 
@@ -15,7 +15,7 @@
 
   "autoload": {
     "psr-4": {
-      "Eureka\\Component\\Token": "./"
+      "Eureka\\Component\\Token\\": "./"
     }
   },
 
