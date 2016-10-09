@@ -14,7 +14,7 @@
 
   "autoload": {
     "psr-4": {
-      "Eureka\\Component\\Token\\": "./"
+      "Eureka\\Component\\Token\\": "./src/Token/"
     }
   }
 

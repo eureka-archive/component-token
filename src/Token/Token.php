@@ -15,7 +15,6 @@ use \Eureka\Component\Mcrypt\Mcrypt;
  * Class to manage token for API
  *
  * @author  Romain Cottard
- * @version 1.0.0
  */
 class Token
 {
@@ -40,16 +39,9 @@ class Token
     private $expirationDelay = 0;
 
     /**
-     * token constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Return authentication ID
      *
-     * @return integer
+     * @return int
      */
     public function getAuthId()
     {
@@ -60,7 +52,7 @@ class Token
      * Set Auth ID.
      *
      * @param  integer $authId
-     * @return $this
+     * @return self
      * @throws \UnderflowException
      */
     public function setAuthId($authId)
@@ -77,8 +69,8 @@ class Token
     /**
      * Set expiration delay in second.
      *
-     * @param  integer $seconds
-     * @return $this
+     * @param  int $seconds
+     * @return self
      * @throws \UnderflowException
      */
     public function setExpirationDelay($seconds)
@@ -97,7 +89,7 @@ class Token
     /**
      * Return expiration time
      *
-     * @return integer
+     * @return int
      */
     public function getExpirationTime()
     {
@@ -107,8 +99,8 @@ class Token
     /**
      * Set expiration time
      *
-     * @param integer
-     * @return $this
+     * @param  integer
+     * @return self
      * @throws \UnderflowException
      */
     protected function setExpirationTime($time)
@@ -124,7 +116,7 @@ class Token
      * Set Salt key
      *
      * @param  string $key
-     * @return $this
+     * @return self
      * @throws \InvalidArgumentException
      */
     public function setKeySalt($key)
@@ -141,7 +133,7 @@ class Token
     /**
      * Check if token is expired
      *
-     * @return boolean
+     * @return bool
      */
     public function isExpired()
     {
@@ -174,7 +166,7 @@ class Token
      * Decrypt token.
      *
      * @param  string $token
-     * @return $this
+     * @return self
      * @throws \RuntimeException
      */
     public function decrypt($token)
@@ -189,7 +181,8 @@ class Token
         $token = base64_decode($token); // Decode
         $iv    = substr($token, 0, $mcrypt->getSizeIV()); // Get IV string
         $token = substr($token, $mcrypt->getSizeIV()); // Get encrypted token
-        $data  = $mcrypt->setIV($iv)->decrypt($token); // Decrypt data
+        $data  = $mcrypt->setIV($iv)
+            ->decrypt($token); // Decrypt data
 
         $unpackedData = unpack('H12rand/VauthId/VexpirationTime/Vcrc32', $data);
 
@@ -212,7 +205,7 @@ class Token
      *
      * @param  integer $rand
      * @param  string  $crc32
-     * @return boolean
+     * @return bool
      */
     protected function checkCRC32($crc32, $rand)
     {
@@ -222,8 +215,8 @@ class Token
     /**
      * Get packed data to encrypt
      *
-     * @param  integer $rand
-     * @param  boolean $checkTime
+     * @param  int  $rand
+     * @param  bool $checkTime
      * @return string
      * @throws \LogicException
      * @throws \UnderflowException
